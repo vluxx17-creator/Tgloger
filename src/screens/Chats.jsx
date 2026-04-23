@@ -1,52 +1,38 @@
 import { Link } from 'react-router-dom';
 import { Search, Edit } from 'lucide-react';
 
-const CHATS = [
-  { id: '1', name: 'Flygramm Support', msg: 'Добро пожаловать в Flygramm!', time: '19:42', unread: 1 },
-  { id: '2', name: 'Избранное', msg: 'Промты для нейросетей...', time: 'Вчера', unread: 0 },
-  { id: '3', name: 'Алексей', msg: 'Голосовое сообщение', time: 'Пн', unread: 0 },
-];
-
 export default function Chats() {
-  return (
-    <div className="bg-white min-h-screen">
-      {/* Шапка */}
-      <header className="px-4 pt-12 pb-2 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-10">
-        <button className="text-[#0088cc] text-sm">Изм.</button>
-        <h1 className="font-bold text-lg">Чаты</h1>
-        <button className="text-[#0088cc]"><Edit size={20} /></button>
-      </header>
+  const chats = [
+    { id: '1', name: 'Flygramm Support', msg: 'Привет! Мы онлайн', time: '12:01', avatar: 'F' },
+    { id: '2', name: 'Избранное', msg: 'Сообщения себе', time: '10:45', avatar: '⭐' }
+  ];
 
-      {/* Поиск */}
-      <div className="px-4 py-2">
-        <div className="bg-gray-100 flex items-center gap-2 px-3 py-1.5 rounded-xl text-gray-400">
-          <Search size={16} />
-          <span className="text-sm">Поиск по чатам</span>
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="px-4 pt-12 pb-2 bg-white/90 backdrop-blur-md sticky top-0 border-b border-gray-200">
+        <div className="flex justify-between items-center">
+          <button className="text-[#0088cc] font-medium text-lg">Изм.</button>
+          <h1 className="font-bold text-lg">Чаты</h1>
+          <button className="text-[#0088cc]"><Edit size={22} /></button>
+        </div>
+        <div className="mt-2 bg-gray-100 flex items-center gap-2 px-3 py-1.5 rounded-xl">
+          <Search size={16} className="text-gray-400" />
+          <input className="bg-transparent outline-none text-sm w-full" placeholder="Поиск" />
         </div>
       </div>
 
-      {/* Список чатов */}
-      <div className="mt-2">
-        {CHATS.map(chat => (
-          <Link to={`/chat/${chat.id}`} key={chat.id} className="flex items-center gap-3 px-4 py-3 ios-tap border-b border-gray-100 last:border-0">
-            {/* Аватарка */}
-            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-bold bg-gradient-to-b ${chat.id === '1' ? 'from-blue-400 to-blue-600' : 'from-yellow-400 to-orange-500'}`}>
-              {chat.name[0]}
+      <div className="flex flex-col">
+        {chats.map(chat => (
+          <Link to={`/chat/${chat.id}`} key={chat.id} className="flex items-center gap-3 p-3 tg-tap border-b border-gray-100 ml-4 pl-0">
+            <div className="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold">
+              {chat.avatar}
             </div>
-            
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-center">
-                <span className="font-bold text-[16px] text-black">{chat.name}</span>
-                <span className="text-[13px] text-gray-400">{chat.time}</span>
+            <div className="flex-1 pr-4">
+              <div className="flex justify-between">
+                <span className="font-bold text-[16px]">{chat.name}</span>
+                <span className="text-sm text-gray-400">{chat.time}</span>
               </div>
-              <div className="flex justify-between items-center mt-0.5">
-                <p className="text-[14px] text-gray-500 truncate pr-4">{chat.msg}</p>
-                {chat.unread > 0 && (
-                  <span className="bg-[#0088cc] text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
-                    {chat.unread}
-                  </span>
-                )}
-              </div>
+              <p className="text-sm text-gray-500 truncate">{chat.msg}</p>
             </div>
           </Link>
         ))}
