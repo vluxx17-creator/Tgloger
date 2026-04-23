@@ -1,55 +1,31 @@
 import { useState } from 'react';
-import { Search, Megaphone, UserPlus } from 'lucide-react';
+import { Search, UserPlus } from 'lucide-react';
 
 export default function Contacts() {
-  const [searchQuery, setSearchQuery] = useState('');
-  
-  // Пример данных (позже заменим на данные из Firebase)
-  const users = [
-    { id: 1, name: 'Иван Иванов', username: '@vanya', avatar: 'https://pravatar.cc' },
-    { id: 2, name: 'Мария Сидорова', username: '@mary', avatar: 'https://pravatar.cc' },
-  ];
-
-  const filteredUsers = users.filter(u => 
-    u.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    u.username.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const [search, setSearch] = useState('');
+  const users = [{ id: 1, name: 'Support Flygramm', tag: '@fly_support' }];
 
   return (
-    <div className="p-4">
-      {/* Поле поиска */}
-      <div className="relative mb-6">
-        <Search className="absolute left-3 top-2.5 text-gray-400 w-5 h-5" />
+    <div className="p-4 bg-white min-h-screen">
+      <div className="relative mb-4">
+        <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
         <input 
-          type="text"
-          placeholder="Поиск людей..."
-          className="w-full bg-gray-100 rounded-xl py-2 pl-10 pr-4 outline-none focus:ring-2 focus:ring-tgBlue"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full bg-gray-100 rounded-xl py-2 pl-10 pr-4 outline-none"
+          placeholder="Поиск по юзернейму..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-
-      {/* Быстрые действия */}
-      <div className="space-y-4 mb-6">
-        <button className="flex items-center gap-4 text-tgBlue font-medium w-full">
-          <div className="bg-blue-100 p-2 rounded-full"><Megaphone size={20} /></div>
-          <span>Создать канал</span>
-        </button>
-        <button className="flex items-center gap-4 text-tgBlue font-medium w-full">
-          <div className="bg-blue-100 p-2 rounded-full"><UserPlus size={20} /></div>
-          <span>Пригласить друзей</span>
-        </button>
-      </div>
-
-      {/* Список пользователей */}
-      <div className="space-y-4">
-        <p className="text-gray-400 text-xs font-bold uppercase tracking-wider">Контакты</p>
-        {filteredUsers.map(user => (
-          <div key={user.id} className="flex items-center gap-3 border-b border-gray-50 pb-3">
-            <img src={user.avatar} className="w-12 h-12 rounded-full shadow-sm" alt="avatar" />
+      <div className="space-y-4 mt-6">
+        <div className="flex items-center gap-3 text-blue-500 font-medium p-2 border-b border-gray-50">
+           <UserPlus size={20} /> <span>Пригласить друзей</span>
+        </div>
+        {users.map(u => (
+          <div key={u.id} className="flex items-center gap-3 p-2">
+            <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
             <div>
-              <div className="font-bold text-sm">{user.name}</div>
-              <div className="text-gray-500 text-xs">{user.username}</div>
+              <p className="font-bold text-sm">{u.name}</p>
+              <p className="text-xs text-gray-400">{u.tag}</p>
             </div>
           </div>
         ))}
