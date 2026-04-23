@@ -2,22 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --tg-blue: #0088cc;
+  --tg-bg: #ffffff;
+  --tg-gray: #8e8e93;
+  --tg-light-gray: #f1f1f2;
+}
+
 body {
   margin: 0;
+  background-color: #f4f4f4; /* Цвет фона за пределами телефона */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
-/* Спецэффекты для Premium, которые мы обсуждали раньше */
-@keyframes gradient-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Скроллбар как в iOS */
+::-webkit-scrollbar {
+  width: 0px;
 }
 
-.animate-premium {
-  background: linear-gradient(-45deg, #6a5af9, #d662ff, #ff62c3, #45aaf2);
-  background-size: 400% 400%;
-  animation: gradient-flow 10s ease infinite;
+.ios-tap:active {
+  background-color: var(--tg-light-gray);
+  transition: background-color 0.1s;
 }
