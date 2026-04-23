@@ -3,16 +3,16 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: './',
   server: {
-    // Разрешаем Render показывать твой сайт
-    allowedHosts: ['tgloger.onrender.com'],
-    // Настройки для корректного запуска на портах Render
+    // Разрешаем абсолютно любые хосты для разработки
+    allowedHosts: true, 
     port: 10000,
     host: true
   },
   preview: {
-    // Дублируем разрешение для режима предпросмотра
-    allowedHosts: ['tgloger.onrender.com'],
+    // Разрешаем абсолютно любые хосты для режима предпросмотра (Render)
+    allowedHosts: true,
     port: 10000,
     host: true
   }
